@@ -5,14 +5,16 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "start:dev": "nodemon index.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/EduardMLT/node-hw-01-cli-addition.git"
   },
   "dependencies": {
-    "commander": "^11.1.0"
+    "comander": "^0.0.1-security",
+    "commander": "^11.1.0",
+    "nodemon": "^3.0.1"
   },
   "bugs": {
     "url": "https://github.com/EduardMLT/node-hw-01-cli-addition/issues"
