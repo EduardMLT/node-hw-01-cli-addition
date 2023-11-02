@@ -1,38 +1,62 @@
-const { Command } = require('commander');
-const program = new Command();
+const Contacts = require('./contacts');
+
+// const { Command } = require("commander");
+// const program = new Command();
+
+const { program } = require("commander");
+
 program
-  .option('-a, --action <type>', 'choose action')
-  .option('-i, --id <type>', 'user id')
-  .option('-n, --name <type>', 'user name')
-  .option('-e, --email <type>', 'user email')
-  .option('-p, --phone <type>', 'user phone');
+  .option("-a, --action <action>", "choose action")
+  .option("-i, --id <id>", "user id")
+  .option("-n, --name <name>", "user name")
+  .option("-e, --email <email>", "user email")
+  .option("-p, --phone <phone>", "user phone");
 
 program.parse(process.argv);
 
 const argv = program.opts();
 
-// TODO: рефакторити
-function invokeAction({ action, id, name, email, phone }) {
-  switch (action) {
-    case 'list':
-      // ...
-      break;
+console.log('module ', argv);
 
-    case 'get':
-      // ... id
-      break;
 
-    case 'add':
-      // ... name email phone
-      break;
+// module.exports = {
+//   listContacts, - list
+//   getContactById, - get
+//   addContact, - add
+//   updateContact, - update
+//   removeContact, - remove
+// };
 
-    case 'remove':
-      // ... id
-      break;
+async function invokeAction({ action, id, name, email, phone }) {
+    switch (action) {
+      case "list":
+        const contacts = await Contacts.listContacts();
+        return console.log(contacts, "contacts =", contacts.length);
 
-    default:
-      console.warn('\x1B[31m Unknown action type!');
-  }
+      case "get":
+        const contact = await Contacts.getContactById(id);
+        return console.log(contact);
+
+      case "add":
+        const createContact = await Contacts.addContact(name, email, phone);
+        return console.log(createContact);
+
+      case "update":
+        const updateContact = await Contacts.updateContact(
+          id,
+          name,
+          email,
+          phone
+        );
+        return console.log(updateContact);
+
+      case "remove":
+        const removeContact = await Contacts.removeContact(id);
+        return console.log(removeContact);
+
+      default:
+        console.warn("\x1B[31m Unknown action type!");
+    }
 }
 
 invokeAction(argv);
