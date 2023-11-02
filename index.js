@@ -1,8 +1,5 @@
 const Contacts = require('./contacts');
 
-// const { Command } = require("commander");
-// const program = new Command();
-
 const { program } = require("commander");
 
 program
@@ -19,13 +16,13 @@ const argv = program.opts();
 console.log('module ', argv);
 
 
-// module.exports = {
+// module.exports : 
 //   listContacts, - list
 //   getContactById, - get
 //   addContact, - add
 //   updateContact, - update
 //   removeContact, - remove
-// };
+
 
 async function invokeAction({ action, id, name, email, phone }) {
     switch (action) {
